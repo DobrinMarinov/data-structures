@@ -1,10 +1,11 @@
 package test;
 
+import model.Stack;
 import structure.BasicStack;
 
 public class StackTest {
 
-    BasicStack<String> stack = new BasicStack<String>();
+    Stack<String> stack = new BasicStack<String>();
 
     public static void main(String[] args) {
         StackTest app = new StackTest();

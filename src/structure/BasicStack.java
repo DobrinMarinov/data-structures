@@ -1,17 +1,26 @@
 package structure;
 
-public class BasicStack<T> {
+import model.Stack;
+
+public class BasicStack<T> implements Stack {
+
+    private static final int DATA_CAPACITY = 1000;
+    private static final int INCREASE_CAPACITY_RATE = 1;
 
     private T[] data;
     private int stackPointer;
 
     public BasicStack() {
-        data = (T[]) new Object[1000];
+        data = (T[]) new Object[DATA_CAPACITY];
         stackPointer = 0;
     }
 
-    public void push(T newItem) {
-        data[stackPointer++] = newItem;
+    @Override
+    public void push(Object newItem) {
+        if(stackPointer == DATA_CAPACITY) {
+            data = (T[]) new Object[DATA_CAPACITY + INCREASE_CAPACITY_RATE];
+        }
+        data[stackPointer++] = (T) newItem;
     }
 
     public T pop() {
@@ -21,7 +30,8 @@ public class BasicStack<T> {
         return data[--stackPointer];
     }
 
-    public boolean contains(T item) {
+    @Override
+    public boolean contains(Object item) {
         for (int i = 0; i < stackPointer; i++) {
             if(data[i].equals(item)) {
                 return true;
@@ -30,7 +40,8 @@ public class BasicStack<T> {
         return false;
     }
 
-    public T access(T item) {
+    @Override
+    public T access(Object item) {
         while (stackPointer > 0) {
             T tempItem = pop();
             if(item.equals(tempItem)) {
