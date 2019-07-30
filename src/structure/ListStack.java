@@ -8,7 +8,6 @@ import java.util.List;
 public class ListStack<T> implements Stack {
 
     private List<T> data;
-    private int stackPointer;
 
     public ListStack() {
         data = new ArrayList<>();
@@ -17,15 +16,17 @@ public class ListStack<T> implements Stack {
     @Override
     public void push(Object newItem) {
         data.add((T) newItem);
-        stackPointer++;
     }
 
     @Override
     public T pop() {
-        if(stackPointer == 0) {
+        int pointer = data.size();
+        if(pointer == 0) {
             throw new IllegalStateException("Stack is empty");
         }
-        return data.get(--stackPointer);
+        T result = data.get(pointer - 1);
+        data.remove(pointer - 1);
+        return result;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ListStack<T> implements Stack {
 
     @Override
     public T access(Object item) {
-        while (stackPointer > 0) {
+        while (data.size() > 0) {
             T tempItem = pop();
             if(item.equals(tempItem)) {
                 return tempItem;
@@ -46,6 +47,6 @@ public class ListStack<T> implements Stack {
 
     @Override
     public int size() {
-        return stackPointer;
+        return data.size();
     }
 }
