@@ -1,6 +1,8 @@
 package structure.queue;
 
-public class BasicQueue<T> {
+import model.Queue;
+
+public class BasicQueue<T> implements Queue<T> {
 
     private static final int DATA_CAPACITY = 1000;
 

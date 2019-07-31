@@ -1,10 +1,12 @@
 package test;
 
+import model.Queue;
 import structure.queue.BasicQueue;
+import structure.queue.ListQueue;
 
 public class QueueTest {
 
-    BasicQueue<Gad2Chair> gad2Lift = new BasicQueue<Gad2Chair>();
+    Queue<Gad2Chair> gad2Lift = new ListQueue<>();
 
     public static void main(String[] args) {
         QueueTest app = new QueueTest();
