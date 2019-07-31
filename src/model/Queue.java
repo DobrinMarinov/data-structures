@@ -13,7 +13,7 @@ public interface Queue<T> {
     //O(n)
     boolean contains(T item);
 
-    //0(1)
+    //0(n)
     T access(int position);
 
 }
