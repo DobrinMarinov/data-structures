@@ -1,8 +1,7 @@
 package test;
 
 import model.Stack;
-import structure.BasicStack;
-import structure.ListStack;
+import structure.stack.ListStack;
 
 public class StackTest {
 

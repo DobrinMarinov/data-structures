@@ -1,6 +1,6 @@
 package test;
 
-import structure.BasicQueue;
+import structure.queue.BasicQueue;
 
 public class QueueTest {
 
