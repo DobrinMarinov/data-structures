@@ -12,6 +12,7 @@ public class BasicHashTable<K, V> {
         this.size = 0;
     }
 
+    //O(1)
     public V get(K key) {
         int hash = calculateHash(key);
 
@@ -22,6 +23,7 @@ public class BasicHashTable<K, V> {
         }
     }
 
+    //O(1)
     public void put(K key, V value) {
         int hash = calculateHash(key);
 
@@ -29,6 +31,7 @@ public class BasicHashTable<K, V> {
         size++;
     }
 
+    //here rehashing is performed so O notation could go from linear to quadratic
     public V delete(K key) {
         V value = get(key);
 
@@ -52,6 +55,7 @@ public class BasicHashTable<K, V> {
         return value;
     }
 
+    //O(1) close to linear depending how well hash function calculation performs
     public boolean hasKey(K key) {
         int hash = calculateHash(key);
         if(data[hash] == null) {
@@ -64,12 +68,12 @@ public class BasicHashTable<K, V> {
         return false;
     }
 
+    //O(n)
     public boolean hasValue(V value) {
-        if(data != null) {
-            for (HashEntry element : data) {
-                if(element.getValue().equals(value)) {
-                    return true;
-                }
+        for (int i = 0; i < this.capacity; i++) {
+            HashEntry entry = data[i];
+            if(entry != null && entry.getValue().equals(value)) {
+                return true;
             }
         }
         return false;
