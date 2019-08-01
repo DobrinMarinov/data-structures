@@ -1,6 +1,8 @@
 package structure.linkedlist;
 
-public class BasicLinkedList<T> {
+import model.LinkedList;
+
+public class BasicLinkedList<T> implements LinkedList<T> {
     private Node first;
     private Node last;
     private int nodeCount;
@@ -13,6 +15,7 @@ public class BasicLinkedList<T> {
         return nodeCount;
     }
 
+    @Override
     public void add(T item) {
         if(first == null) {
             first = new Node(item);
@@ -25,6 +28,7 @@ public class BasicLinkedList<T> {
         nodeCount++;
     }
 
+    @Override
     public void insert(T item, int position) {
         if (position > size()) {
             throw new IllegalArgumentException("LinkedList has fewer items than position provided");
@@ -43,6 +47,7 @@ public class BasicLinkedList<T> {
         nodeCount++;
     }
 
+    @Override
     public T remove() {
         if(first == null) {
             throw new IllegalStateException("LinkedList is empty");
@@ -54,6 +59,7 @@ public class BasicLinkedList<T> {
         return result;
     }
 
+    @Override
     public T get(int position) {
         if(first == null) {
             throw new IllegalArgumentException("LinkedList has fewer items than position provided");
@@ -70,6 +76,7 @@ public class BasicLinkedList<T> {
         return null;
     }
 
+    @Override
     public int find(T item) {
         if(first == null) {
             throw new IllegalArgumentException("LinkedList is empty");
@@ -85,6 +92,7 @@ public class BasicLinkedList<T> {
         return -1;
     }
 
+    @Override
     public T removeAt(int position) {
         if(first == null) {
             throw new IllegalStateException("LinkedList is empty");
