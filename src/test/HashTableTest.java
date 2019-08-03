@@ -5,11 +5,18 @@ import structure.hashtable.BasicHashTable;
 public class HashTableTest {
 
     //used a 12 piece socket set for this job
-    private BasicHashTable<String, String> toolset = new BasicHashTable<>(12);
+    private static final int TABLE_SIZE = 12;
+
+    private BasicHashTable<String, String> toolset = new BasicHashTable<>(TABLE_SIZE);
 
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+
         HashTableTest app = new HashTableTest();
         app.changeOil();
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("Program run time in milliseconds: " + (endTime - startTime));
     }
 
     public void changeOil() {
