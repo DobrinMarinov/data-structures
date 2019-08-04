@@ -21,6 +21,76 @@ public class BasicBinaryTree<X extends Comparable<X>> {
         }
     }
 
+    public boolean contains(X item) {
+        return getNode(item) == null ? false : true;
+    }
+
+    public boolean delete(X item) {
+        boolean deleted = false;
+
+        if(this.root == null) {
+            return false;
+        }
+
+        Node currentNode = getNode(item);
+        if(currentNode != null) {
+            if(currentNode.getLeft() == null && currentNode.getRight() == null) {
+                unlink(currentNode, null);
+                deleted = true;
+            } else if (currentNode.getLeft() == null && currentNode.getRight() != null) {
+                unlink(currentNode, currentNode.getRight());
+                deleted = true;
+            } else if (currentNode.getLeft() != null && currentNode.getRight() == null) {
+                unlink(currentNode, currentNode.getLeft());
+                deleted = true;
+            } else {
+                Node child = currentNode.getLeft();
+                while (child.getRight() != null && child.getLeft() != null) {
+                    child = child.getRight();
+                }
+
+                child.getParent().setRight(null);
+
+                child.setLeft(currentNode.getLeft());
+                child.setRight(currentNode.getRight());
+
+                unlink(currentNode, child);
+                deleted = true;
+            }
+        }
+
+        if(deleted) this.size--;
+
+        return deleted;
+    }
+
+    private void unlink(Node currentNode, Node newNode) {
+        if(currentNode == this.root) {
+            newNode.setLeft(currentNode.getLeft());
+            newNode.setRight(currentNode.getRight());
+            this.root = newNode;
+        } else if (currentNode.getParent().getRight() == currentNode) {
+            currentNode.getParent().setRight(newNode);
+        } else {
+            currentNode.getParent().setLeft(newNode);
+        }
+    }
+
+    private Node getNode(X item) {
+        Node currentNode = this.root;
+        while (currentNode != null) {
+            int value = item.compareTo(currentNode.getItem());
+            if(value == 0) {
+                return currentNode;
+            } else if (value < 0) {
+                currentNode = currentNode.getLeft();
+            } else {
+                currentNode = currentNode.getRight();
+            }
+        }
+        return null;
+    }
+
     private void insert(Node parent, Node child) {
         if(child.getItem().compareTo(parent.getItem()) < 0) {
             //if the child is less then the parent, it goes on the left
